@@ -1,0 +1,13 @@
+[project]
+name = "samurai-sudoku-generator"
+version = "1.0.0"
+description = "Samurai Sudoku generator to PDF (A4/Letter/Legal) with difficulty and solutions."
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = ["reportlab>=4.2.2"]
+
+[project.scripts]
+samurai-sudoku = "samurai_sudoku.cli:main"
+
+[tool.pytest.ini_options]
+addopts = "-q"

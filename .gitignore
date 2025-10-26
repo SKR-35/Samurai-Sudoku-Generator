@@ -1,0 +1,32 @@
+# Python cache / build
+__pycache__/
+*.py[cod]
+*$py.class
+.build/
+build/
+dist/
+wheels/
+*.egg-info/
+.eggs/
+pip-wheel-metadata/
+output/
+
+# Virtual envs
+.venv/
+venv/
+ENV/
+
+# Tests / tooling
+.pytest_cache/
+.coverage*
+.tox/
+.nox/
+.mypy_cache/
+.pytype/
+*.pdf
+
+# Logs & env
+logs/
+*.log
+.env
+.env.*
