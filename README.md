@@ -15,7 +15,9 @@ pip install -e .
 
 ## Usage
 
+~~~bash
 samurai-sudoku --easy 4 --medium 3 --hard 2 --evil 1 --workers 4 --seed 58966 --uniq-timeout 6 --outfile book_mix.pdf
+~~~
 
 ## Options
 
