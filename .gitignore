@@ -10,6 +10,7 @@ wheels/
 .eggs/
 pip-wheel-metadata/
 output/
+puzzles.db
 
 # Virtual envs
 .venv/
