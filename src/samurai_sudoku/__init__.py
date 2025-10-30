@@ -4,5 +4,6 @@ __all__ = [
     "solver",
     "generator",
     "pdf",
-    "dlx9"
+    "dlx9",
+    "db"
 ]
