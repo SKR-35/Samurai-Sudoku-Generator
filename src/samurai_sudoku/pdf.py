@@ -142,6 +142,7 @@ def draw_puzzle_page(canvas: Canvas, puzzle, page_num: int, total_pages: int, di
 def draw_solutions_pages(canvas: Canvas, solutions: List, pagesize, puzzles_per_row: int = 2) -> None:
     """
     Append compact solution thumbnails. Digits and line widths scale to cell size.
+    Puzzle IDs are centered *below* each miniature and aligned across the row.
     """
     W, H = pagesize
     margin = 15 * mm
@@ -160,20 +161,30 @@ def draw_solutions_pages(canvas: Canvas, solutions: List, pagesize, puzzles_per_
     mw = grid_w / cols
     mh = grid_h / rows
 
-    # Miniature cell size per Samurai (21x21)
-    cell = min((mw - 10) / 21.0, (mh - 10) / 21.0)
+    # Reserve space below each miniature for the ID label
+    label_pad = 8.0  # points
+    # Miniature cell size for 21x21 Samurai
+    cell = min((mw - 10) / 21.0, (mh - 10 - label_pad) / 21.0)
 
     idx = 0
     for r in range(rows):
         for c in range(cols):
             if idx >= len(solutions):
                 break
-            x_origin = margin + c * mw + (mw - (21 * cell)) / 2.0
-            y_origin = margin + (rows - 1 - r) * mh + (mh - (21 * cell)) / 2.0
+
+            # center the 21x21 block within its cell, leaving label_pad below
+            block_w = 21 * cell
+            block_h = 21 * cell
+            x_origin = margin + c * mw + (mw - block_w) / 2.0
+            y_origin = margin + (rows - 1 - r) * mh + (mh - (block_h + label_pad)) / 2.0 + label_pad
 
             _draw_samurai_outline(canvas, x_origin, y_origin, cell, mini=True)
             _draw_digits(canvas, solutions[idx], x_origin, y_origin, cell, mini=True)
 
+            # centered ID label *below* the miniature
             canvas.setFont("Helvetica", 8)
-            canvas.drawString(x_origin, y_origin + 21 * cell + 4, f"#{idx + 1}")
+            label_x = x_origin + (block_w / 2.0)
+            label_y = y_origin - (label_pad * 0.7)  # a touch above the reserved pad bottom
+            canvas.drawCentredString(label_x, label_y, f"#{idx + 1}")
+
             idx += 1
